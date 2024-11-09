@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov'}
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'arw','gif', 'mp4', 'avi', 'mov'}
 
 def allowed_file(filename):
     return '.' in filename and \
