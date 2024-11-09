@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>_></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: rgba(255, 255, 255, 0.2); /* 添加这一行 */
+            background-image: url('https://c-ssl.duitang.com/uploads/item/202006/03/20200603062645_jmlez.png');
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(189, 185, 185, 0.75); /* 半透明背景 */
+            color: #333; /* 更改为灰色 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+        .navbar .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .navbar .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .navbar .right-text {
+            font-size: 1.2em;
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+        .navbar span {
+            margin: 0 15px;
+        }
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 60px;
+            padding: 0 20px;
+            flex: 1;
+            overflow: hidden; /* 添加这一行 */
+        }
+        .grid img {
+            width: calc(33.333% - 10px);
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+        .grid img:hover {
+            transform: scale(1.05);
+        }
+        .footer {
+            background-color: rgba(200, 200, 200); /* 半透明背景 */
+            color: #333; /* 更改为灰色 */
+            text-align: center;
+            padding: 10px 0;
+        }
+        .navbar .pagination button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px; /* 添加这一行 */
+            background-color: #007AFF; /* 苹果按钮的蓝色背景 */
+            color: white; /* 白色文字 */
+            border: none; /* 去掉边框 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+            transition: background-color 0.2s ease-in-out; /* 添加背景颜色过渡效果 */
+        }
+        .navbar .pagination button:hover {
+            background-color: #0056b3; /* 鼠标悬停时的蓝色背景 */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">ohrの会员制餐厅</div>
+        <div class="pagination">
+            {% if page > 1 %}
+                <button onclick="location.href='{{ url_for('index', page=page-1) }}'">上一页</button>
+            {% endif %}
+            <span>Page {{ page }}</span>
+            {% if images|length == 9 %}
+                <button onclick="location.href='{{ url_for('index', page=page+1) }}'">下一页</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="grid">
+        {% for image in images %}
+            <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="{{ image }}">
+        {% endfor %}
+    </div>
+    <div class="footer">
+        &copy; 2077 会员制餐厅
+    </div>
+</body>
+</html>
